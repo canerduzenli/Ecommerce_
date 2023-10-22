@@ -1,0 +1,30 @@
+﻿@model List<Order>
+
+<h1>Order Lists</h1>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+
+        <tr>
+            <th>Order ID</th>
+            <th>DeliveryCountry</th>
+            <th>Address</th>
+            <th>Mailing Code</th>
+            <th>Number Of Items</th>
+            <th>Total Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in ViewBag.Orders)
+        {
+            <tr>
+                <td>@order.Id</td>
+                <td>@order.DeliveryCountry</td>
+                <td>@order.Address</td>
+                <td>@order.MailingCode</td>
+                <td>@order.AllItemsNum</td>
+                <td>@order.TotalPriceWithTaxes CAD</td>
+            </tr>
+        }
+    </tbody>
+</table>

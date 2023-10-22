@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ShoppingCart.Models.Products>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h2>Products</h2>
+
+<form method="get" asp-action="Search" style="margin-bottom: 20px;">
+    <input type="text" name="searchTerm" value="" placeholder="Search..." style="padding: 5px; width: 70%;">
+    <button type="submit" style="padding: 5px 15px;">Search</button>
+    <a asp-action="Index" style="padding: 5px 15px; margin-left: 10px; background-color: #eee; text-decoration: none;">All</a>
+</form>
+
+<table style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            <th style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.Name)</th>
+            <th style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.Description)</th>
+            <th style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.AvailableQuantity)</th>
+            <th style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.PriceCAD)</th>
+            <th style="padding: 8px; border: 1px solid #ddd;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Name)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Description)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.AvailableQuantity)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.PriceCAD)</td>
+                <td style="padding: 8px; border: 1px solid #ddd;">
+                    @if (item.AvailableQuantity > 0)
+                    {
+                        <a asp-action="AddToCart" asp-route-productId="@item.ProductId" style="color: #007bff; text-decoration: none;">Cart</a>
+                    }
+                    else
+                    {
+                        <span style="color: #aaa;">Out of Stock</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
